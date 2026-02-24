@@ -4,8 +4,6 @@ services:
     image: mongo:latest
     container_name: mongodb
     restart: always
-    ports:
-      - "27017:27017"
     volumes:
       - mongo-data:/data/db
     networks:
@@ -25,7 +23,7 @@ services:
 
 
   frontend:
-    image: cloudguy03/frontend:v1   # (use latest working frontend image)
+    image: cloudguy03/frontend:v1
     container_name: frontend
     restart: always
     depends_on:
@@ -41,7 +39,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
       - frontend
       - backend
